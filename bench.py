@@ -10,12 +10,12 @@ import matplotlib.pyplot as plt
 class MetricMaintenance:
     def __init__(self, n, d, D):
         self.L = 10 
-        self.m = d
+        self.m = 10
         self.d = d
         self.n = n
         self.D = D #degree of truncation
         self.R = 5 #number of sampled sketches.
-        tmp_sigma = [0.1 for i in range(self.d)]
+        tmp_sigma = [0.05 for i in range(self.d)]
         self.Sigma = np.zeros((self.d, self.d))
         self.Q = np.zeros((self.d, self.d))
         self.Sigma_sqrt  = np.zeros((self.d, self.d))
@@ -52,7 +52,7 @@ class MetricMaintenance:
             # for i in range(self.d):
             #     tmp[i][i] = np.random.normal(loc=0, scale=math.sqrt(0.1))
             # self.Pi.append(tmp)
-            self.Pi.append(np.random.normal(loc=0, scale=math.sqrt(1.0/self.m), size=(self.m, self.d))) #TODO Pi is the sketch matrix randomly sampled from normal distribution.
+            self.Pi.append(np.random.normal(loc=0, scale=math.sqrt(1.0/self.m), size=(self.m, self.d)))
 
         self.x = []
         for i in range(self.n):
@@ -63,7 +63,6 @@ class MetricMaintenance:
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi[j], self.U[tau]))
-                #tmp.append(self.U[tau])
             self.Pi_U.append(tmp)
 
         self.tilde_x = []
@@ -102,35 +101,12 @@ class MetricMaintenance:
             acc_result.append(np.dot(np.dot(q-self.x[i], self.fA),(q-self.x[i]).T))
             tilde_result.append(np.dot(np.dot(q-self.x[i], tilde_fA),(q-self.x[i]).T))
             hat_result.append(np.dot(np.dot(q-self.x[i], hat_tilde_fA),(q-self.x[i]).T))
-            
             sum_tmp = 0
             for tau in range(truncation_degree+1):
-                # sum_tmp += 1.0/math.factorial(tau) * np.linalg.norm(np.dot( self.U[tau], q-self.x[i]), ord=2)
                 sum_tmp += 1.0/math.factorial(tau) * np.dot(np.dot( self.U[tau], q-self.x[i]), np.dot( self.U[tau], q-self.x[i]).T)
             summation_tilde_result.append(sum_tmp)
         return np.array(acc_result), np.array(tilde_result), np.array(summation_tilde_result)
 
-    def query_one(self, q):
-        Pi_U_q = []
-        for r in range(self.R):
-            tmp = []
-            for tau in range(self.D + 1):
-                tmp.append(np.dot(self.Pi_U[r][tau], q))
-            Pi_U_q.append(tmp)
-        
-        
-        d_i = []
-        for tau in range(self.D + 1):
-            d_i_tau = []
-            for r in range(self.R):
-                tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
-                tmp_norm = np.linalg.norm(tmp, ord=2)
-                d_i_tau.append(tmp_norm)
-            tilde_d_i_tau = np.median(d_i_tau)
-            d_i.append(tilde_d_i_tau)
-        d_i_sum = np.sum(d_i)
-
-        return d_i_sum
 
     def query_all_accurate(self, q):
         result = []
@@ -140,7 +116,7 @@ class MetricMaintenance:
 
     def query_all(self, q):
         Pi_U_q = []
-        for r in range(self.R):
+        for r in range(self.R):#TODO lianke, r should be randomly choosen from [L] for R times.
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))
@@ -153,42 +129,38 @@ class MetricMaintenance:
                 d_i_tau = []
                 for r in range(self.R):
                     tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
-                    tmp_norm = np.linalg.norm(tmp)
+                    tmp_norm = 1.0/math.factorial(tau) * np.dot(tmp, tmp.T)
                     d_i_tau.append(tmp_norm)
                 tilde_d_i_tau = np.median(d_i_tau)
                 d_i.append(tilde_d_i_tau)
             d_i_sum = np.sum(d_i)
             d.append(d_i_sum)
-        # print(d)
         return np.array(d)
 
 
 def accuracy(true_result, result):
-    # print(true_result)
-    # print(result)
-    return np.mean(result/true_result)
+
+    return np.mean(abs(result - true_result)/true_result)
 
 
 
 
 
-n = 2
-d=100
-q = np.random.rand(d)
-instance = MetricMaintenance(n, d, 40)
+n=10000
 
-for D in [0, 1,3,5,10,20,40]:
-    start = time.time()
-    end = time.time()
-    # print("init time {} seconds".format(end-start))
-    start = time.time()
-    # instance.diagonal_accuracy()
-    acc_result, tilde_result, summation_tilde_result = instance.test_tilde_A_accuracy(q, D)
-    print("D = {}".format(D))
-    for i in range(n):
-        print("f(A) norm ={}, tilde_f(A) norm={}, summation = {} ".format(acc_result[i], tilde_result[i], summation_tilde_result[i]))
-    
+for d in [100, 1000, 5000, 10000]:
+    for D in [0, 1,2,3,4, 5,10,20,40]:
+        q = np.random.rand(d)
+        instance = MetricMaintenance(n, d, D)
+        # print("d={} D ={} init time {} seconds".format(d, D, end-start))
+        start = time.time()
+        print("d={} D ={} error rate : {}".format(d, D, accuracy(instance.query_all_accurate(q), instance.query_all(q))))
+        end = time.time()
+        # print("d={} D ={}query avg time {} seconds".format(d, D,end-start))
 
-    #print("D ={} accuracy : {}".format(D, accuracy(instance.query_all_accurate(q), instance.query_all(q))))
-    end = time.time()
-    # print("query avg time {} seconds".format(end-start))
+
+# acc_result, tilde_result, summation_tilde_result = instance.test_tilde_A_accuracy(q, D)
+# print("D = {}".format(D))
+# for i in range(n):
+#     print("f(A) norm ={}, tilde_f(A) norm={}, summation = {} ".format(acc_result[i], tilde_result[i], summation_tilde_result[i]))
+        
