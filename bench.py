@@ -39,7 +39,6 @@ class MetricMaintenance:
             self.A.append(np.dot(self.A[-1], self.Sigma)) 
 
         for tau in range(self.D+1):
-            self.U[tau] = np.dot(self.U[tau], 1.0/math.factorial(tau))
             self.A[tau] = np.dot(self.A[tau], 1.0/math.factorial(tau))
 
         self.tilde_fA = np.zeros((self.d, self.d))
@@ -100,7 +99,10 @@ class MetricMaintenance:
         for i in range(self.n):
             acc_result.append(np.dot(np.dot(q-self.x[i], self.fA),(q-self.x[i]).T))
             tilde_result.append(np.dot(np.dot(q-self.x[i], tilde_fA),(q-self.x[i]).T))
-            summation_tilde_result.append(np.linalg.norm(np.dot(q-self.x[i], summation_tilde_fA), ord=2))
+            sum_tmp = 0
+            for tau in range(truncation_degree+1):
+                sum_tmp += 1.0/math.factorial(tau) * np.linalg.norm(np.dot(q-self.x[i], self.U[tau]), ord=2)
+            summation_tilde_result.append(sum_tmp)
         return np.array(acc_result), np.array(tilde_result), np.array(summation_tilde_result)
 
     def query_one(self, q):
