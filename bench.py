@@ -89,21 +89,25 @@ class MetricMaintenance:
     def test_tilde_A_accuracy(self,q, truncation_degree):
         acc_result = []
         tilde_result = []
+        hat_result = []
         summation_tilde_result = []
+
         tilde_fA = np.zeros((self.d, self.d))
-        summation_tilde_fA = np.zeros((self.d, self.d))
+        hat_tilde_fA = np.zeros((self.d, self.d))
 
         for tau in range(truncation_degree+1):
             tilde_fA += self.A[tau]
-            summation_tilde_fA += self.U[tau]
+            hat_tilde_fA += np.dot(math.factorial(tau), np.dot(self.U[tau], self.U[tau].T))
         for i in range(self.n):
             acc_result.append(np.dot(np.dot(q-self.x[i], self.fA),(q-self.x[i]).T))
             tilde_result.append(np.dot(np.dot(q-self.x[i], tilde_fA),(q-self.x[i]).T))
+            hat_result.append(np.dot(np.dot(q-self.x[i], hat_tilde_fA),(q-self.x[i]).T))
+            
             sum_tmp = 0
             for tau in range(truncation_degree+1):
-                sum_tmp += 1.0/math.factorial(tau) * np.linalg.norm(np.dot(q-self.x[i], self.U[tau]), ord=2)
+                sum_tmp += 1.0/math.factorial(tau) * np.linalg.norm(np.dot( self.U[tau], q-self.x[i]), ord=2)
             summation_tilde_result.append(sum_tmp)
-        return np.array(acc_result), np.array(tilde_result), np.array(summation_tilde_result)
+        return np.array(acc_result), np.array(tilde_result), np.array(hat_result)
 
     def query_one(self, q):
         Pi_U_q = []
