@@ -105,9 +105,10 @@ class MetricMaintenance:
             
             sum_tmp = 0
             for tau in range(truncation_degree+1):
-                sum_tmp += 1.0/math.factorial(tau) * np.linalg.norm(np.dot( self.U[tau], q-self.x[i]), ord=2)
+                # sum_tmp += 1.0/math.factorial(tau) * np.linalg.norm(np.dot( self.U[tau], q-self.x[i]), ord=2)
+                sum_tmp += 1.0/math.factorial(tau) * np.dot(np.dot( self.U[tau], q-self.x[i]), np.dot( self.U[tau], q-self.x[i]).T)
             summation_tilde_result.append(sum_tmp)
-        return np.array(acc_result), np.array(tilde_result), np.array(hat_result)
+        return np.array(acc_result), np.array(tilde_result), np.array(summation_tilde_result)
 
     def query_one(self, q):
         Pi_U_q = []
