@@ -90,13 +90,18 @@ class MetricMaintenance:
     def test_tilde_A_accuracy(self,q, truncation_degree):
         acc_result = []
         tilde_result = []
+        summation_tilde_result = []
         tilde_fA = np.zeros((self.d, self.d))
+        summation_tilde_fA = np.zeros((self.d, self.d))
+
         for tau in range(truncation_degree+1):
             tilde_fA += self.A[tau]
+            summation_tilde_fA += self.U[tau]
         for i in range(self.n):
             acc_result.append(np.dot(np.dot(q-self.x[i], self.fA),(q-self.x[i]).T))
             tilde_result.append(np.dot(np.dot(q-self.x[i], tilde_fA),(q-self.x[i]).T))
-        return np.array(acc_result), np.array(tilde_result)
+            summation_tilde_result.append(np.linalg.norm(np.dot(q-self.x[i], summation_tilde_fA), ord=2))
+        return np.array(acc_result), np.array(tilde_result), np.array(summation_tilde_result)
 
     def query_one(self, q):
         Pi_U_q = []
@@ -171,16 +176,12 @@ for D in [0, 1,3,5,10,20,40]:
     # print("init time {} seconds".format(end-start))
     start = time.time()
     # instance.diagonal_accuracy()
-    acc_result, tilde_result = instance.test_tilde_A_accuracy(q, D)
+    acc_result, tilde_result, summation_tilde_result = instance.test_tilde_A_accuracy(q, D)
     print("D = {}".format(D))
     for i in range(n):
-        print("f(A) norm ={}, tilde_f(A) norm={} ".format(acc_result[i], tilde_result[i]))
+        print("f(A) norm ={}, tilde_f(A) norm={}, summation = {} ".format(acc_result[i], tilde_result[i], summation_tilde_result[i]))
     
-    # x = np.linspace(0, n, n)
-    # plt.title("D={}".format(D))
-    # plt.scatter(x, acc_result)
-    # plt.scatter(x, tilde_result)
-    # plt.show()
+
     #print("D ={} accuracy : {}".format(D, accuracy(instance.query_all_accurate(q), instance.query_all(q))))
     end = time.time()
     # print("query avg time {} seconds".format(end-start))
