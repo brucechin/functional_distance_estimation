@@ -17,7 +17,7 @@ class MetricMaintenance:
         self.n = n
         self.D = D #degree of truncation
         self.R = 5 #number of sampled sketches.
-        tmp_sigma = [0.05 for i in range(self.d)]
+        tmp_sigma = [0.2 - i * 0.1/self.d for i in range(self.d)]
         self.Sigma = np.zeros((self.d, self.d))
         self.Q = np.zeros((self.d, self.d))
         self.Sigma_sqrt  = np.zeros((self.d, self.d))
@@ -82,7 +82,7 @@ class MetricMaintenance:
             self.tilde_x.append(tmp_1)
 
     def memory_complexity(self):
-        return 32.0 * (len(self.Pi_U)*len(self.Pi_U[0])*len(self.Pi_U[0][0])*len(self.Pi_U[0][0][0]) + len(self.tilde_x)*len(self.tilde_x[0]) + len(self.x)*len(self.x[0]) + len(self.U) * len(self.U[0]))/1000 #KB
+        return 32.0 * (len(self.Pi_U)*len(self.Pi_U[0])*len(self.Pi_U[0][0])*len(self.Pi_U[0][0][0]) + len(self.tilde_x)*len(self.tilde_x[0]) + len(self.x)*len(self.x[0]) + len(self.U) * len(self.U[0]))/1000000 #MB
 
     def diagonal_accuracy(self):
         tmp = 0
@@ -193,16 +193,16 @@ def accuracy(true_result, result):
 
 
 
-n=100
+n=10000
 
 init_time = []
 query_all_time = []
 query_one_time = []
 query_pair_time = []
-memory_consumption_diff_sketch_size = [] #KB
+memory_consumption_diff_sketch_size = []  #MB
 accuracy_diff_sketch_size = []
 accuracy_diff_D = []
-memory_consumption_diff_D = [] #KB
+memory_consumption_diff_D = []  #MB
 
 
 for d in [1000]:
@@ -239,58 +239,36 @@ for d in [1000]:
             query_pair_time.append((end-start)/1000)
             #print("query pair average time {} seconds".format((end-start)/1000))
 
-
-for d in [1000]:
-    for m in [10]:
-        for D in [0,1,2,3,4,5,10,20,40]:
-            start = time.time()
-            instance = MetricMaintenance(n, d, D, m, False)
-            end = time.time()
-            init_time.append(end - start)
-            #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
-            start = time.time()
-            for i in range(10):
-                q = np.random.rand(d)
-                instance.query_all(q)
-            end = time.time()
-            query_all_time.append((end-start)/10)
-            #print("query all time {} seconds".format((end-start)/10))
-            accuracy_diff_D.append(accuracy(instance.query_all_accurate(q), instance.query_all(q)))
-
-
-
 print("init_time_exp={}".format(init_time))
 print("query_all_time_exp={}".format(query_all_time))
 print("query_one_time_exp={}".format(query_one_time))
 print("query_pair_time_exp={}".format(query_pair_time))
 print("memory_consumption_exp={}".format(memory_consumption_diff_sketch_size))
 print("accuracy_diff_sketch_size_exp={}".format(accuracy_diff_sketch_size))
+
+for d in [1000]:
+    for m in [10]:
+        for D in [0,1,2,5,10,20]:
+            start = time.time()
+            instance = MetricMaintenance(n, d, D, m, False)
+            end = time.time()
+            # init_time.append(end - start)
+            #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
+            start = time.time()
+            for i in range(10):
+                q = np.random.rand(d)
+                instance.query_all(q)
+            end = time.time()
+            # query_all_time.append((end-start)/10)
+            #print("query all time {} seconds".format((end-start)/10))
+            accuracy_diff_D.append(accuracy(instance.query_all_accurate(q), instance.query_all(q)))
+
+
+
+
 print("accuracy_diff_D_exp={}".format(accuracy_diff_D))
 
 
-# ticks_size = 20
 
-# x = np.linspace(0, len(init_time), len(init_time))
-# plt.plot(x, init_time, label='init time')
-# plt.plot(x, query_all_time, label='query time')
-# plt.xlabel("sketch size", fontsize= ticks_size)
-# plt.ylabel("time (sec)", fontsize= ticks_size)
-# plt.xticks(x, [10, 20, 40, 80, 160], fontsize= ticks_size)
-# plt.legend(loc='upper left')
-# plt.yticks(fontsize=ticks_size)
-# plt.legend(loc="best", fontsize=20)
-# plt.savefig("time_sketch_size.pdf", dpi=None, facecolor='w', edgecolor='w',
-#             orientation='portrait', bbox_inches='tight')
-# plt.show()
-
-
-# plt.plot(x, accuracy_list)
-# plt.xlabel("sketch size", fontsize= ticks_size)
-# plt.ylabel("accuracy", fontsize= ticks_size)
-# plt.xticks(x, [10, 20, 40, 80, 160], fontsize= ticks_size)
-# plt.yticks(fontsize=ticks_size)
-# plt.savefig("accuracy_sketch_size.pdf", dpi=None, facecolor='w', edgecolor='w',
-#             orientation='portrait', bbox_inches='tight')
-# plt.show()
 
 
