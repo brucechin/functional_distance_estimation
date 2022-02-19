@@ -84,6 +84,14 @@ class MetricMaintenance:
     def memory_complexity(self):
         return 32.0 * (len(self.Pi_U)*len(self.Pi_U[0])*len(self.Pi_U[0][0])*len(self.Pi_U[0][0][0]) + len(self.tilde_x)*len(self.tilde_x[0]) + len(self.x)*len(self.x[0]) + len(self.U) * len(self.U[0]))/1000000 #MB
 
+    def F_norm_error(self):
+        error_matrix = self.fA - self.tilde_fA
+        sum_tmp = 0
+        for i in range(len(self.A)):
+            for j in range(len(self.A[0])):
+                sum_tmp += error_matrix[i][j] * error_matrix[i][j] 
+        return math.sqrt(sum_tmp)
+
     def diagonal_accuracy(self):
         tmp = 0
         for i in range(self.d):
@@ -153,7 +161,6 @@ class MetricMaintenance:
             p.append(tilde_d_i_tau)
         p_sum = np.sum(p)
         return p_sum
-        return p
 
     def query_all(self, q):
         Pi_U_q = []
@@ -203,6 +210,17 @@ memory_consumption_diff_sketch_size = []  #MB
 accuracy_diff_sketch_size = []
 accuracy_diff_D = []
 memory_consumption_diff_D = []  #MB
+
+tilde_fA_f_norm_error = []
+
+
+for D in [0,1,2,3,4,5,6,7,8,9,10]:
+    instance = MetricMaintenance(100, 1000, D, 10, False)
+    tilde_fA_f_norm_error.append(instance.F_norm_error())
+
+print("tilde_fA_f_norm_error={}".format(tilde_fA_f_norm_error))
+
+
 
 
 for d in [1000]:
