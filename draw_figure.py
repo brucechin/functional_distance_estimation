@@ -52,7 +52,7 @@ plt.plot(x, tilde_fA_f_norm_error)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Approximation Error", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,3,4,5,6,7,8,9,10], fontsize= ticks_size)
-plt.legend(loc='upper right', fontsize=15)
+# plt.legend(loc='upper right', fontsize=15)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("tilde_fA_approximation_error.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
