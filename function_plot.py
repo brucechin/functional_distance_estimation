@@ -23,6 +23,7 @@ plt.xlabel("x", fontsize= ticks_size)
 plt.ylabel("y", fontsize= ticks_size)
 plt.xticks(fontsize= 15)
 plt.yticks(fontsize= 15)
+plt.ylim([-40,60])
 plt.legend(loc='best')
 plt.legend(loc="best", fontsize=15)
 plt.savefig("functions_figure.pdf", dpi=300, facecolor='w', edgecolor='w',
