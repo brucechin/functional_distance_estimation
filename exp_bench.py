@@ -255,7 +255,7 @@ for d in [1000]:
             for i in range(1000):
                 instance.query_one(q, random.randint(0, n-1))
             end = time.time()
-            query_one_time.append((end-start)/1000)
+            query_one_time.append((end-start)/1000 * 1000) #millisecond
             #print("query one average time {} seconds".format((end-start)/1000))
 
 
@@ -263,7 +263,7 @@ for d in [1000]:
             for i in range(1000):
                 instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
             end = time.time()
-            query_pair_time.append((end-start)/1000)
+            query_pair_time.append((end-start)/1000 * 1000) #millisecond
             #print("query pair average time {} seconds".format((end-start)/1000))
 
 print("init_time_exp={}".format(init_time))
