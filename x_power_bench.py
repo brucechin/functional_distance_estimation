@@ -38,7 +38,7 @@ class MetricMaintenance:
         self.n = n
         self.D = D #degree of truncation
         self.R = 5 #number of sampled sketches.
-        tmp_sigma = [0.1 - i * 0.1/self.d for i in range(self.d)]
+        tmp_sigma = [0.05 - i * 0.05/self.d for i in range(self.d)]
         self.Sigma = np.zeros((self.d, self.d))
         self.Q = np.zeros((self.d, self.d))
         self.Sigma_sqrt  = np.zeros((self.d, self.d))
@@ -48,11 +48,11 @@ class MetricMaintenance:
             self.Sigma_sqrt[i][i] = math.sqrt(tmp_sigma[i])
         
         
-        self.Sigma_exp = np.zeros((self.d, self.d))
+        self.Sigma_power = np.zeros((self.d, self.d))
         for i in range(self.d):
-            self.Sigma_exp[i][i] = (self.Sigma[i][i] + 1)** self.q
+            self.Sigma_power[i][i] = (self.Sigma[i][i] + 1)** self.q
     
-        self.fA = np.dot(np.dot(self.Q, self.Sigma_exp), self.Q.T)
+        self.fA = np.dot(np.dot(self.Q, self.Sigma_power), self.Q.T)
 
         self.U = [np.identity(self.d)] #the first element is identity matrix
         self.A = [np.identity(self.d)] #the first element is identity matrix
@@ -287,12 +287,12 @@ for d in [1000]:
             query_pair_time.append((end-start)/1000 * 1000) #millisecond
             #print("query pair average time {} seconds".format((end-start)/1000))
 
-print("init_time_exp={}".format(init_time))
-print("query_all_time_exp={}".format(query_all_time))
-print("query_one_time_exp={}".format(query_one_time))
-print("query_pair_time_exp={}".format(query_pair_time))
-print("memory_consumption_exp={}".format(memory_consumption_diff_sketch_size))
-print("accuracy_diff_sketch_size_exp={}".format(accuracy_diff_sketch_size))
+print("init_time_power={}".format(init_time))
+print("query_all_time_power={}".format(query_all_time))
+print("query_one_time_power={}".format(query_one_time))
+print("query_pair_time_power={}".format(query_pair_time))
+print("memory_consumption_power={}".format(memory_consumption_diff_sketch_size))
+print("accuracy_diff_sketch_size_power={}".format(accuracy_diff_sketch_size))
 
 
 for d in [1000]:
@@ -315,4 +315,4 @@ for d in [1000]:
 
 
 
-print("accuracy_diff_D_exp={}".format(accuracy_diff_D))
+print("accuracy_diff_D_power={}".format(accuracy_diff_D))
