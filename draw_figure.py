@@ -303,9 +303,9 @@ plt.savefig("memory_consumption_sketch_size_power.pdf", dpi=None, facecolor='w',
 # plt.show()
 plt.figure()
 
-plt.plot(x, accuracy_diff_sketch_size_power3, label="Sigma in (0, 0.2)")
-plt.plot(x, accuracy_diff_sketch_size_power1, label="Sigma in (0, 0.1)")
-plt.plot(x, accuracy_diff_sketch_size_power2, label="Sigma in (0, 0.01)")
+plt.plot(x, accuracy_diff_sketch_size_power3, label="$\Lambda \in (0,0.2)$")
+plt.plot(x, accuracy_diff_sketch_size_power1, label="$\Lambda \in (0,0.1)$")
+plt.plot(x, accuracy_diff_sketch_size_power2, label="$\Lambda \in (0,0.01)$")
 
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Accuracy", fontsize= ticks_size)
@@ -320,9 +320,9 @@ plt.savefig("accuracy_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor
 
 x = np.linspace(0, len(accuracy_diff_D_power1), len(accuracy_diff_D_power1))
 plt.figure()
-plt.plot(x, accuracy_diff_D_power3, label="Sigma in (0, 0.2)")
-plt.plot(x, accuracy_diff_D_power1, label="Sigma in (0, 0.1)")
-plt.plot(x, accuracy_diff_D_power2, label="Sigma in (0, 0.01)")
+plt.plot(x, accuracy_diff_D_power3, label="$\Lambda \in (0,0.2)$")
+plt.plot(x, accuracy_diff_D_power1, label="$\Lambda \in (0,0.1)$")
+plt.plot(x, accuracy_diff_D_power2, label="$\Lambda \in (0,0.01)$")
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Accuracy", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,5,10,20], fontsize= ticks_size)
