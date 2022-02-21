@@ -248,3 +248,86 @@ plt.yticks(fontsize=ticks_size)
 plt.savefig("accuracy_truncation_degree_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()
+
+
+
+
+init_time_power1=[1.468998670578003, 1.5255253314971924, 2.2781879901885986, 4.105222940444946, 5.351844549179077]
+query_all_time_power1=[0.5782590866088867, 0.5843977451324462, 0.59607994556427, 0.6390925407409668, 0.668518352508545]
+query_one_time_power1=[0.11860251426696777, 0.11909127235412598, 0.14149951934814453, 0.25570201873779297, 0.35085082054138184]
+query_pair_time_power1=[0.06268525123596191, 0.06248068809509277, 0.06291055679321289, 0.1028754711151123, 0.10608124732971191]
+memory_consumption_power1=[336.128, 348.928, 374.528, 425.728, 528.128]
+accuracy_diff_sketch_size_power1=[0.595467048709633, 0.7178082904681979, 0.5788909336324917, 0.6295059054760107, 0.7158848773343757]
+accuracy_diff_sketch_size_power2=[0.7024335562578536, 0.7752377277632126, 0.8442467955357094, 0.8833619144254536, 0.9241383190240913]
+accuracy_diff_sketch_size_power3=[0.14295580242126582, 0.13493456103646317, 0.15830072647364146, 0.17276530498560572, 0.15982977034749435]
+
+accuracy_diff_D_power1=[0.08305029257459395, 0.24930104860194158, 0.46675519693735523, 0.9234066217725369, 0.9997878787762959, 0.9999999999994392]
+accuracy_diff_D_power2=[0.8143604942800233, 0.976555374002664, 0.9978145469489041, 0.9999995485754958, 0.9999999999999836, 0.9999999999999998]
+accuracy_diff_D_power3=[0.004392816270307964, 0.023908441370678157, 0.073317530873659, 0.46343044608603834, 0.9681307278575743, 0.9999999310855812]
+
+#f=power1(x)
+plt.figure()
+
+x = np.linspace(0, len(init_time_power1), len(init_time_power1))
+plt.plot(x, init_time_power1, label='Init time')
+plt.plot(x, query_all_time_power1, label='QueryAll time')
+plt.xlabel("Sketch Size", fontsize= ticks_size)
+plt.ylabel("Time (millisecond)", fontsize= ticks_size)
+plt.xticks(x, [10, 20, 40, 80, 160], fontsize= ticks_size)
+plt.legend(loc='upper left', fontsize=15)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("init_queryall_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+plt.figure()
+
+plt.plot(x, query_one_time_power1, label='QueryOne time')
+plt.plot(x, query_pair_time_power1, label='QueryPair time')
+plt.xlabel("Sketch Size", fontsize= ticks_size)
+plt.ylabel("Time (sec)", fontsize= ticks_size)
+plt.xticks(x, [10, 20, 40, 80, 160], fontsize= ticks_size)
+plt.legend(loc='upper left', fontsize=15)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("queryone_pair_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+plt.figure()
+
+plt.plot(x, memory_consumption_power1)
+plt.xlabel("Sketch Size", fontsize= ticks_size)
+plt.ylabel("Mem Usage(KB)", fontsize= ticks_size)
+plt.xticks(x, [10, 20, 40, 80, 160], fontsize= ticks_size)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("memory_consumption_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+plt.figure()
+
+plt.plot(x, accuracy_diff_sketch_size_power3, label="Sigma in (0, 0.2)")
+plt.plot(x, accuracy_diff_sketch_size_power1, label="Sigma in (0, 0.1)")
+plt.plot(x, accuracy_diff_sketch_size_power2, label="Sigma in (0, 0.01)")
+
+plt.xlabel("Sketch Size", fontsize= ticks_size)
+plt.ylabel("Accuracy", fontsize= ticks_size)
+plt.xticks(x, [10, 20, 40, 80, 160], fontsize= ticks_size)
+plt.yticks(fontsize=ticks_size)
+plt.legend(loc='best', fontsize=12)
+plt.savefig("accuracy_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+
+
+
+x = np.linspace(0, len(accuracy_diff_D_power1), len(accuracy_diff_D_power1))
+plt.figure()
+plt.plot(x, accuracy_diff_D_power3, label="Sigma in (0, 0.2)")
+plt.plot(x, accuracy_diff_D_power1, label="Sigma in (0, 0.1)")
+plt.plot(x, accuracy_diff_D_power2, label="Sigma in (0, 0.01)")
+plt.xlabel("Truncation Degree", fontsize= ticks_size)
+plt.ylabel("Accuracy", fontsize= ticks_size)
+plt.xticks(x, [0,1,2,5,10,20], fontsize= ticks_size)
+plt.yticks(fontsize=ticks_size)
+plt.legend(loc='best', fontsize=12)
+plt.savefig("accuracy_truncation_degree_power.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()

@@ -38,7 +38,7 @@ class MetricMaintenance:
         self.n = n
         self.D = D #degree of truncation
         self.R = 5 #number of sampled sketches.
-        tmp_sigma = [0.2 - i * 0.2/self.d for i in range(self.d)]
+        tmp_sigma = [0.01 - i * 0.01/self.d for i in range(self.d)]
         self.Sigma = np.zeros((self.d, self.d))
         self.Q = np.zeros((self.d, self.d))
         self.Sigma_sqrt  = np.zeros((self.d, self.d))
