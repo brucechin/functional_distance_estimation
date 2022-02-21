@@ -19,9 +19,9 @@ query_all_time_exp=[0.4123673677444458, 0.4163767576217651, 0.46226890087127687,
 query_one_time_exp=[0.09827971458435059, 0.09829163551330566, 0.16924762725830078, 0.20717930793762207, 0.31299614906311035, 0.47512078285217285, 1.5035526752471924]
 query_pair_time_exp=[0.0454249382019043, 0.04500889778137207, 0.07750511169433594, 0.07821774482727051, 0.08260989189147949, 0.0876321792602539, 0.10349678993225098]
 memory_consumption_exp=[336.128, 348.928, 374.528, 425.728, 528.128, 732.928, 1603.328]
-accuracy_diff_sketch_size_exp=[0.6797326679180073, 0.7489687942635819, 0.8445414633135297, 0.8787472792702673, 0.9234339659765861, 0.9194825461512539, 0.9693236318110707]
+accuracy_diff_sketch_size_exp=[0.6611766767618003, 0.7586692279512598, 0.8334962705580237, 0.8656859580909687, 0.9078250643206239, 0.8932873401611096, 0.9680207153858289]
+accuracy_diff_D_exp=[0.30297579159613275, 0.6517908874189273, 0.8319452152170854, 0.9109364565839573, 0.9143941705714478, 0.9176625915771792]
 
-accuracy_diff_D_exp=[0.4001010963348568, 0.7611534117398406, 0.9291826788666716, 0.9994538516524958, 0.9999999859844313, 0.9999999999999999]
 
 
 init_time_cosh=[1.482191801071167, 1.595693826675415, 2.4987170696258545, 3.253356456756592, 4.976968050003052, 10.36504578590393, 31.448013067245483]
@@ -32,8 +32,12 @@ memory_consumption_cosh=[336.128, 348.928, 374.528, 425.728, 528.128, 732.928, 1
 accuracy_diff_sketch_size_cosh=[0.6646812462625218, 0.7694247272113595, 0.8298702930167182, 0.8615900575743942, 0.9208782385335889, 0.9243355559846357, 0.9669113141414258]
 
 
-
-accuracy_diff_D_cosh=[0.6876664451775936, 0.9763297165084222, 0.9991734662964744, 0.9999999980353798, 0.9999999999999999, 0.9999999999999999]
+init_time_cosh_diff_D=[1.6174461841583252, 3.241597890853882, 4.728921413421631, 6.259262561798096, 8.889387130737305, 19.441669702529907, 38.89839005470276]
+query_all_time_cosh_diff_D=[0.18285346031188965, 0.2885807752609253, 0.39251294136047366, 0.4942338943481445, 0.68833327293396, 1.2160800218582153, 2.3524981260299684]
+query_one_time_cosh_diff_D=[0.06141376495361329, 0.1798534393310547, 0.2854635715484619, 0.37432098388671875, 0.5589690208435059, 0.9855766296386719, 2.198000431060791]
+query_pair_time_cosh_diff_D=[0.028178930282592773, 0.04703068733215332, 0.066314697265625, 0.08400440216064453, 0.10943865776062012, 0.16537690162658691, 0.28284549713134766]
+memory_consumption_cosh_diff_D=[374.432, 425.664, 476.896, 528.128, 630.592, 886.752, 1399.072]
+accuracy_diff_D_cosh=[0.6583200427122602, 0.9220585423933717, 0.9209420990061956, 0.9031585430019385, 0.913083124954452, 0.8819865864793275, 0.9064279488360844]
 
 
 
@@ -42,10 +46,9 @@ query_all_time_sinh=[0.4248421430587769, 0.42919578552246096, 0.474113917350769,
 query_one_time_sinh=[0.10335755348205566, 0.10453939437866211, 0.173170804977417, 0.20807290077209473, 0.3087117671966553, 0.4868438243865967, 1.5221765041351318]
 query_pair_time_sinh=[0.0464630126953125, 0.046538591384887695, 0.07992696762084961, 0.07932114601135254, 0.08460831642150879, 0.08888554573059082, 0.10391449928283691]
 memory_consumption_sinh=[336.128, 348.928, 374.528, 425.728, 528.128, 732.928, 1603.328]
-accuracy_diff_sketch_size_sinh=[0.6941333078301195, 0.7739229212570067, 0.8460486148356292, 0.8516090702721072, 0.9219618013961846, 0.9379476633968368, 0.9670745077853529]
+accuracy_diff_sketch_size_sinh=[0.6778750189997567, 0.7741223988773899, 0.8432876765724711, 0.8593286775141528, 0.9185344349691575, 0.9321856702627598, 0.965606929100662]
+accuracy_diff_D_sinh=[0.7919341511980902, 0.9217835376986091, 0.9098102654325744, 0.921508276339948, 0.9187847189813966, 0.9189638972911025]
 
-
-accuracy_diff_D_sinh=[0.8624003618103883, 0.9931348752909338, 0.9998273914485457, 0.9999999997601088, 0.9999999999999998, 0.9999999999999998]
 
 
 
@@ -78,39 +81,39 @@ plt.savefig("tilde_fA_approximation_error.pdf", dpi=None, facecolor='w', edgecol
 
 #f=exp(x)
 x = np.linspace(0, len(init_time_exp), len(init_time_exp))
-plt.figure()
-plt.plot(x, init_time_exp, label='Init time')
-plt.plot(x, query_all_time_exp, label='QueryAll time')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.legend(loc='upper left', fontsize=15)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("init_queryall_time_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
+# plt.figure()
+# plt.plot(x, init_time_exp, label='Init time')
+# plt.plot(x, query_all_time_exp, label='QueryAll time')
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Time (sec)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("init_queryall_time_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
 
 
-plt.figure()
-plt.plot(x, query_one_time_exp, label='QueryOne time')
-plt.plot(x, query_pair_time_exp, label='QueryPair time')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (millisecond)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.legend(loc='upper left', fontsize=15)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_pair_time_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-plt.figure()
-plt.plot(x, memory_consumption_exp)
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("memory_consumption_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
+# plt.figure()
+# plt.plot(x, query_one_time_exp, label='QueryOne time')
+# plt.plot(x, query_pair_time_exp, label='QueryPair time')
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Time (millisecond)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("queryone_pair_time_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
+# plt.figure()
+# plt.plot(x, memory_consumption_exp)
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("memory_consumption_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
 
 plt.figure()
 plt.plot(x, accuracy_diff_sketch_size_exp)
@@ -141,32 +144,57 @@ plt.savefig("accuracy_truncation_degree_exp.pdf", dpi=None, facecolor='w', edgec
 
 
 
+
+
 #f=cosh(x)
 plt.figure()
 
 x = np.linspace(0, len(init_time_cosh), len(init_time_cosh))
-plt.plot(x, init_time_cosh, label='Init time')
+plt.plot(x, init_time_cosh, label='Initialize time')
+plt.xlabel("Sketch Size", fontsize= ticks_size)
+plt.ylabel("Time (sec)", fontsize= ticks_size)
+plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("init_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+
+
+plt.figure()
+x = np.linspace(0, len(init_time_cosh), len(init_time_cosh))
 plt.plot(x, query_all_time_cosh, label='QueryAll time')
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.legend(loc='upper left', fontsize=15)
 plt.yticks(fontsize=ticks_size)
-plt.savefig("init_queryall_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+plt.savefig("queryall_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()
+
+
 plt.figure()
 
 plt.plot(x, query_one_time_cosh, label='QueryOne time')
+plt.xlabel("Sketch Size", fontsize= ticks_size)
+plt.ylabel("Time (millisecond)", fontsize= ticks_size)
+plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("queryone_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+
+
+plt.figure()
+
 plt.plot(x, query_pair_time_cosh, label='QueryPair time')
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (millisecond)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.legend(loc='upper left', fontsize=15)
 plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_pair_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+plt.savefig("querypair_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()
+
 plt.figure()
 
 plt.plot(x, memory_consumption_cosh)
@@ -190,13 +218,81 @@ plt.savefig("accuracy_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor=
 
 
 
+
+x = np.linspace(0, len(init_time_cosh_diff_D), len(init_time_cosh_diff_D))
+plt.figure()
+plt.plot(x, init_time_cosh_diff_D, label='Init time')
+# plt.plot(x, query_all_time_cosh_diff_D, label='QueryAll time')
+plt.xlabel("Truncation Degree", fontsize= ticks_size)
+plt.ylabel("Time (sec)", fontsize= ticks_size)
+plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("init_time_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+
+plt.figure()
+# plt.plot(x, init_time_cosh_diff_D, label='Init time')
+plt.plot(x, query_all_time_cosh_diff_D, label='QueryAll time')
+plt.xlabel("Truncation Degree", fontsize= ticks_size)
+plt.ylabel("Time (sec)", fontsize= ticks_size)
+plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("queryall_time_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+
+plt.figure()
+
+plt.plot(x, query_one_time_cosh_diff_D, label='QueryOne time')
+# plt.plot(x, query_pair_time_cosh_diff_D, label='QueryPair time')
+plt.xlabel("Truncation Degree", fontsize= ticks_size)
+plt.ylabel("Time (millisecond)", fontsize= ticks_size)
+plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("queryone_time_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+
+plt.figure()
+
+# plt.plot(x, query_one_time_cosh_diff_D, label='QueryOne time')
+plt.plot(x, query_pair_time_cosh_diff_D, label='QueryPair time')
+plt.xlabel("Truncation Degree", fontsize= ticks_size)
+plt.ylabel("Time (millisecond)", fontsize= ticks_size)
+plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("querypair_time_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+
+
+plt.figure()
+
+
+
+plt.plot(x, memory_consumption_cosh_diff_D)
+plt.xlabel("Truncation Degree", fontsize= ticks_size)
+plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
+plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
+plt.yticks(fontsize=ticks_size)
+plt.savefig("memory_consumption_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
+            orientation='portrait', bbox_inches='tight')
+# plt.show()
+plt.figure()
+
+
 x = np.linspace(0, len(accuracy_diff_D_cosh), len(accuracy_diff_D_cosh))
 plt.figure()
 
 plt.plot(x, accuracy_diff_D_cosh)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Accuracy", fontsize= ticks_size)
-plt.xticks(x, [0,1,2,5,10,20], fontsize= ticks_size)
+plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("accuracy_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
@@ -205,42 +301,62 @@ plt.savefig("accuracy_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edge
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #f=sinh(x)
-plt.figure()
+# plt.figure()
 
-x = np.linspace(0, len(init_time_sinh), len(init_time_sinh))
-plt.plot(x, init_time_sinh, label='Init time')
-plt.plot(x, query_all_time_sinh, label='QueryAll time')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (millisecond)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.legend(loc='upper left', fontsize=15)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("init_queryall_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-plt.figure()
+# x = np.linspace(0, len(init_time_sinh), len(init_time_sinh))
+# plt.plot(x, init_time_sinh, label='Init time')
+# plt.plot(x, query_all_time_sinh, label='QueryAll time')
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Time (millisecond)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("init_queryall_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
+# plt.figure()
 
-plt.plot(x, query_one_time_sinh, label='QueryOne time')
-plt.plot(x, query_pair_time_sinh, label='QueryPair time')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.legend(loc='upper left', fontsize=15)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_pair_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-plt.figure()
+# plt.plot(x, query_one_time_sinh, label='QueryOne time')
+# plt.plot(x, query_pair_time_sinh, label='QueryPair time')
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Time (sec)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("queryone_pair_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
+# plt.figure()
 
-plt.plot(x, memory_consumption_sinh)
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("memory_consumption_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
+# plt.plot(x, memory_consumption_sinh)
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("memory_consumption_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
+
 plt.figure()
 
 plt.plot(x, accuracy_diff_sketch_size_sinh)
@@ -285,55 +401,58 @@ accuracy_diff_D_power1=[0.08305029257459395, 0.24930104860194158, 0.466755196937
 accuracy_diff_D_power2=[0.8143604942800233, 0.976555374002664, 0.9978145469489041, 0.9999995485754958, 0.9999999999999836, 0.9999999999999998]
 accuracy_diff_D_power3=[0.004392816270307964, 0.023908441370678157, 0.073317530873659, 0.46343044608603834, 0.9681307278575743, 0.9999999310855812]
 
-
+accuracy_diff_sketch_size_power=[0.6611766767618003, 0.7586692279512598, 0.8334962705580237, 0.8656859580909687, 0.9078250643206239, 0.8932873401611096, 0.9680207153858289]
+accuracy_diff_D_power=[0.30297579159613275, 0.6517908874189273, 0.8319452152170854, 0.9109364565839573, 0.9143941705714478, 0.9176625915771792]
 
 #f=power1(x)
+# plt.figure()
+
+# x = np.linspace(0, len(init_time_power1), len(init_time_power1))
+# plt.plot(x, init_time_power1, label='Init time')
+# plt.plot(x, query_all_time_power1, label='QueryAll time')
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Time (millisecond)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("init_queryall_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
+# plt.figure()
+
+# plt.plot(x, query_one_time_power1, label='QueryOne time')
+# plt.plot(x, query_pair_time_power1, label='QueryPair time')
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Time (sec)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.legend(loc='upper left', fontsize=15)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("queryone_pair_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
+# plt.figure()
+
+# plt.plot(x, memory_consumption_power1)
+# plt.xlabel("Sketch Size", fontsize= ticks_size)
+# plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
+# plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
+# plt.yticks(fontsize=ticks_size)
+# plt.savefig("memory_consumption_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
+#             orientation='portrait', bbox_inches='tight')
+# # plt.show()
+
+
 plt.figure()
-
-x = np.linspace(0, len(init_time_power1), len(init_time_power1))
-plt.plot(x, init_time_power1, label='Init time')
-plt.plot(x, query_all_time_power1, label='QueryAll time')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (millisecond)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.legend(loc='upper left', fontsize=15)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("init_queryall_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-plt.figure()
-
-plt.plot(x, query_one_time_power1, label='QueryOne time')
-plt.plot(x, query_pair_time_power1, label='QueryPair time')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.legend(loc='upper left', fontsize=15)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_pair_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-plt.figure()
-
-plt.plot(x, memory_consumption_power1)
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("memory_consumption_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-plt.figure()
-
-plt.plot(x, accuracy_diff_sketch_size_power3, label="$\Lambda \in (0,0.2)$")
-plt.plot(x, accuracy_diff_sketch_size_power1, label="$\Lambda \in (0,0.1)$")
-plt.plot(x, accuracy_diff_sketch_size_power2, label="$\Lambda \in (0,0.01)$")
-
+x = np.linspace(0, len(accuracy_diff_sketch_size_power), len(accuracy_diff_sketch_size_power))
+# plt.plot(x, accuracy_diff_sketch_size_power3, label="$\Lambda \in (0,0.2)$")
+# plt.plot(x, accuracy_diff_sketch_size_power1, label="$\Lambda \in (0,0.1)$")
+# plt.plot(x, accuracy_diff_sketch_size_power2, label="$\Lambda \in (0,0.01)$")
+plt.plot(x, accuracy_diff_sketch_size_power)
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Accuracy", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
-plt.legend(loc='best', fontsize=12)
+# plt.legend(loc='best', fontsize=12)
 plt.savefig("accuracy_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()
@@ -342,14 +461,15 @@ plt.savefig("accuracy_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor
 
 x = np.linspace(0, len(accuracy_diff_D_power1), len(accuracy_diff_D_power1))
 plt.figure()
-plt.plot(x, accuracy_diff_D_power3, label="$\Lambda \in (0,0.2)$")
-plt.plot(x, accuracy_diff_D_power1, label="$\Lambda \in (0,0.1)$")
-plt.plot(x, accuracy_diff_D_power2, label="$\Lambda \in (0,0.01)$")
+# plt.plot(x, accuracy_diff_D_power3, label="$\Lambda \in (0,0.2)$")
+# plt.plot(x, accuracy_diff_D_power1, label="$\Lambda \in (0,0.1)$")
+# plt.plot(x, accuracy_diff_D_power2, label="$\Lambda \in (0,0.01)$")
+plt.plot(x, accuracy_diff_D_power)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Accuracy", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
-plt.legend(loc='best', fontsize=12)
+# plt.legend(loc='best', fontsize=12)
 plt.savefig("accuracy_truncation_degree_power.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()

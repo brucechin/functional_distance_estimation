@@ -38,7 +38,7 @@ class MetricMaintenance:
         self.n = n
         self.D = D #degree of truncation
         self.R = 5 #number of sampled sketches.
-        tmp_sigma = [0.2 - i * 0.2/self.d for i in range(self.d)]
+        tmp_sigma = [0.1 - i * 0.1/self.d for i in range(self.d)]
         self.Sigma = np.zeros((self.d, self.d))
         self.Q = np.zeros((self.d, self.d))
         self.Sigma_sqrt  = np.zeros((self.d, self.d))
@@ -294,11 +294,12 @@ print("query_pair_time_exp={}".format(query_pair_time))
 print("memory_consumption_exp={}".format(memory_consumption_diff_sketch_size))
 print("accuracy_diff_sketch_size_exp={}".format(accuracy_diff_sketch_size))
 
+
 for d in [1000]:
-    for m in [10]:
+    for m in [160]:
         for D in [0,1,2,5,10,20]:
             start = time.time()
-            instance = MetricMaintenance(n, d, D, m, False)
+            instance = MetricMaintenance(n, d, D, m, True)
             end = time.time()
             # init_time.append(end - start)
             #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
