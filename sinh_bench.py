@@ -174,7 +174,7 @@ memory_consumption_diff_D = []  #MB
 
 
 for d in [1000]:
-    for m in [10, 20, 40, 80, 160]:
+    for m in [10, 20, 40, 80, 160, 320, 1000]:
         for D in [3]:
             start = time.time()
             instance = MetricMaintenance(n, d, D, m, True)

@@ -254,7 +254,7 @@ print("tilde_fA_spetral_norm_error={}".format(tilde_fA_spectral_norm_error))
 
 
 for d in [1000]:
-    for m in [10, 20, 40, 80, 160]:
+    for m in [10, 20, 40, 80, 160,320, 1000]:
         for D in [3]:
             start = time.time()
             instance = MetricMaintenance(n, d, D, m, True)
