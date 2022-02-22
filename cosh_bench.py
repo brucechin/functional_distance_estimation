@@ -163,55 +163,55 @@ def accuracy(true_result, result):
 
 n=10000
 
-# init_time = []
-# query_all_time = []
-# query_one_time = []
-# query_pair_time = []
-# memory_consumption_diff_sketch_size = []  #MB
-# accuracy_diff_sketch_size = []
-# accuracy_diff_D = []
-# memory_consumption_diff_D = []  #MB
+init_time = []
+query_all_time = []
+query_one_time = []
+query_pair_time = []
+memory_consumption_diff_sketch_size = []  #MB
+accuracy_diff_sketch_size = []
+accuracy_diff_D = []
+memory_consumption_diff_D = []  #MB
 
-# for d in [1000]:
-#     for m in [10, 20, 40, 80, 160, 320, 1000]:
-#         for D in [3]:
-#             start = time.time()
-#             instance = MetricMaintenance(n, d, D, m, True)
-#             end = time.time()
-#             init_time.append(end - start)
-#             memory_consumption_diff_sketch_size.append(instance.memory_complexity()) 
-#             #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
-#             start = time.time()
-#             for i in range(10):
-#                 q = np.random.rand(d)
-#                 instance.query_all(q)
-#             end = time.time()
-#             query_all_time.append((end-start)/10)
-#             #print("query all time {} seconds".format((end-start)/10))
-#             accuracy_diff_sketch_size.append(accuracy(instance.query_all_accurate(q), instance.query_all(q)))
+for d in [1000]:
+    for m in [10, 20, 40, 80, 160, 320, 1000]:
+        for D in [3]:
+            start = time.time()
+            instance = MetricMaintenance(n, d, D, m, True)
+            end = time.time()
+            init_time.append(end - start)
+            memory_consumption_diff_sketch_size.append(instance.memory_complexity()) 
+            #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
+            start = time.time()
+            for i in range(10):
+                q = np.random.rand(d)
+                instance.query_all(q)
+            end = time.time()
+            query_all_time.append((end-start)/10)
+            #print("query all time {} seconds".format((end-start)/10))
+            accuracy_diff_sketch_size.append(accuracy(instance.query_all_accurate(q), instance.query_all(q)))
 
-#             start = time.time()
-#             q = np.random.rand(d)
-#             for i in range(1000):
-#                 instance.query_one(q, random.randint(0, n-1))
-#             end = time.time()
-#             query_one_time.append((end-start)/1000 * 1000) #millisecond
-#             #print("query one average time {} seconds".format((end-start)/1000))
+            start = time.time()
+            q = np.random.rand(d)
+            for i in range(1000):
+                instance.query_one(q, random.randint(0, n-1))
+            end = time.time()
+            query_one_time.append((end-start)/1000 * 1000) #millisecond
+            #print("query one average time {} seconds".format((end-start)/1000))
 
 
-#             start = time.time()
-#             for i in range(1000):
-#                 instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
-#             end = time.time()
-#             query_pair_time.append((end-start)/1000 * 1000) #millisecond
-#             #print("query pair average time {} seconds".format((end-start)/1000))
+            start = time.time()
+            for i in range(1000):
+                instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
+            end = time.time()
+            query_pair_time.append((end-start)/1000 * 1000) #millisecond
+            #print("query pair average time {} seconds".format((end-start)/1000))
 
-# print("init_time_cosh={}".format(init_time))
-# print("query_all_time_cosh={}".format(query_all_time))
-# print("query_one_time_cosh={}".format(query_one_time))
-# print("query_pair_time_cosh={}".format(query_pair_time))
-# print("memory_consumption_cosh={}".format(memory_consumption_diff_sketch_size))
-# print("accuracy_diff_sketch_size_cosh={}".format(accuracy_diff_sketch_size))
+print("init_time_cosh={}".format(init_time))
+print("query_all_time_cosh={}".format(query_all_time))
+print("query_one_time_cosh={}".format(query_one_time))
+print("query_pair_time_cosh={}".format(query_pair_time))
+print("memory_consumption_cosh={}".format(memory_consumption_diff_sketch_size))
+print("accuracy_diff_sketch_size_cosh={}".format(accuracy_diff_sketch_size))
 
 
 
