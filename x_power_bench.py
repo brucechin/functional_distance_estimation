@@ -173,7 +173,7 @@ class MetricMaintenance:
                 tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
                 tmp_norm = combination_numbers(self.q, tau) * np.dot(tmp, tmp.T)
                 d_i_tau.append(tmp_norm)
-            tilde_d_i_tau = d_i_tau[int(self.R/2)] #np.median(d_i_tau)
+            tilde_d_i_tau = np.median(d_i_tau)#d_i_tau[int(self.R/2)] #np.median(d_i_tau)
             d_i.append(tilde_d_i_tau)
         d_i_sum = np.sum(d_i)
         return d_i_sum
@@ -186,7 +186,7 @@ class MetricMaintenance:
                 tmp =  self.tilde_x[i][r][tau] - self.tilde_x[j][r][tau]
                 tmp_norm = combination_numbers(self.q, tau) * np.dot(tmp, tmp.T)
                 d_i_tau.append(tmp_norm)
-            tilde_d_i_tau = d_i_tau[int(self.R/2)] #np.median(d_i_tau)
+            tilde_d_i_tau = np.median(d_i_tau)#d_i_tau[int(self.R/2)] #np.median(d_i_tau)
             p.append(tilde_d_i_tau)
         p_sum = np.sum(p)
         return p_sum
@@ -212,7 +212,7 @@ class MetricMaintenance:
                     tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
                     tmp_norm = combination_numbers(self.q, tau) * np.dot(tmp, tmp.T)
                     d_i_tau.append(tmp_norm)
-                tilde_d_i_tau = d_i_tau[int(self.R/2)] #np.median(d_i_tau)
+                tilde_d_i_tau = np.median(d_i_tau)#d_i_tau[int(self.R/2)] #np.median(d_i_tau)
                 d_i.append(tilde_d_i_tau)
             d_i_sum = np.sum(d_i)
             d.append(d_i_sum)
