@@ -156,7 +156,6 @@ class MetricMaintenance:
 
 
 def accuracy(true_result, result):
-
     return 1 - np.mean(abs(result - true_result)/true_result)
 
 
@@ -176,70 +175,72 @@ n=10000
 
 num_repeat = 5
 
-init_time = []
-query_all_time = []
-query_one_time = []
-query_pair_time = []
-memory_consumption_diff_sketch_size = []  #MB
-accuracy_diff_sketch_size = []
-accuracy_diff_D = []
-memory_consumption_diff_D = []  #MB
+# init_time = []
+# query_all_time = []
+# query_one_time = []
+# query_pair_time = []
+# memory_consumption_diff_sketch_size = []  #MB
+# accuracy_diff_sketch_size = []
+# accuracy_diff_D = []
+# memory_consumption_diff_D = []  #MB
 
-for d in [1000]:
-    for m in [10, 20, 40, 80, 160, 320, 1000]:
-        for D in [3]:
-            instance = MetricMaintenance(n, d, D, m, True)
+# for d in [1000]:
+#     for m in [10, 20, 40, 80, 160, 320, 1000]:
+#         for D in [3]:
+#             instance = MetricMaintenance(n, d, D, m, True)
 
-            init_time.append([])
-            for i in range(3):
-                start = time.time()
-                instance = MetricMaintenance(n, d, D, m, True)
-                end = time.time()
-                init_time[-1].append(end - start)
+#             init_time.append([])
+#             for i in range(3):
+#                 start = time.time()
+#                 instance = MetricMaintenance(n, d, D, m, True)
+#                 end = time.time()
+#                 init_time[-1].append(end - start)
             
-            memory_consumption_diff_sketch_size.append(instance.memory_complexity()) 
-            #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
-            accuracy_diff_sketch_size.append([])
-            query_all_time.append([])
-            for i in range(num_repeat):
-                start = time.time()
-                q = np.random.rand(d)
-                ans = instance.query_all(q)
-                end = time.time()
-                # used for compute error bar
-                query_all_time[-1].append((end-start))
-                #print("query all time {} seconds".format((end-start)))
-                accuracy_diff_sketch_size[-1].append(accuracy(instance.query_all_accurate(q), ans))
+#             memory_consumption_diff_sketch_size.append(instance.memory_complexity()) 
+#             #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
+#             accuracy_diff_sketch_size.append([])
+#             query_all_time.append([])
+#             for i in range(num_repeat):
+#                 start = time.time()
+#                 q = np.random.rand(d)
+#                 ans = instance.query_all(q)
+#                 end = time.time()
+#                 # used for compute error bar
+#                 query_all_time[-1].append((end-start))
+#                 #print("query all time {} seconds".format((end-start)))
+#                 accuracy_diff_sketch_size[-1].append(accuracy(instance.query_all_accurate(q), ans))
 
-            # start = time.time()
-            # q = np.random.rand(d)
-            # for i in range(1000):
-            #     instance.query_one(q, random.randint(0, n-1))
-            # end = time.time()
-            # query_one_time.append((end-start)/1000 * 1000) #millisecond
-            # #print("query one average time {} seconds".format((end-start)/1000))
+#             # start = time.time()
+#             # q = np.random.rand(d)
+#             # for i in range(1000):
+#             #     instance.query_one(q, random.randint(0, n-1))
+#             # end = time.time()
+#             # query_one_time.append((end-start)/1000 * 1000) #millisecond
+#             # #print("query one average time {} seconds".format((end-start)/1000))
 
-            query_pair_time.append([])
-            for j in range(num_repeat):
-                start = time.time()
-                for i in range(100):
-                    instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
-                end = time.time()
-                query_pair_time[-1].append((end-start)/100 * 1000) #millisecond
-            #print("query pair average time {} seconds".format((end-start)/1000))
+#             query_pair_time.append([])
+#             for j in range(num_repeat):
+#                 start = time.time()
+#                 for i in range(100):
+#                     instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
+#                 end = time.time()
+#                 query_pair_time[-1].append((end-start)/100 * 1000) #millisecond
+#             #print("query pair average time {} seconds".format((end-start)/1000))
 
-print("init_time_cosh={}".format(compute_mean(init_time)))
-print("query_all_time_cosh={}".format(compute_mean(query_all_time)))
-# print("query_one_time_cosh={}".format(query_one_time))
-print("query_pair_time_cosh={}".format(compute_mean(query_pair_time)))
-print("memory_consumption_cosh={}".format(memory_consumption_diff_sketch_size))
-print("accuracy_diff_sketch_size_cosh={}".format(compute_mean(accuracy_diff_sketch_size)))
+# print(accuracy_diff_sketch_size)
+
+# print("init_time_cosh={}".format(compute_mean(init_time)))
+# print("query_all_time_cosh={}".format(compute_mean(query_all_time)))
+# # print("query_one_time_cosh={}".format(query_one_time))
+# print("query_pair_time_cosh={}".format(compute_mean(query_pair_time)))
+# print("memory_consumption_cosh={}".format(memory_consumption_diff_sketch_size))
+# print("accuracy_diff_sketch_size_cosh={}".format(compute_mean(accuracy_diff_sketch_size)))
 
 
-print("accuracy_diff_sketch_size_cosh_std_err={}".format(std_error(accuracy_diff_sketch_size)))
-print("query_pair_time_cosh_std_err={}".format(std_error(query_pair_time)))
-print("query_all_time_cosh_std_err={}".format(std_error(query_all_time)))
-print("init_time_cosh_std_err={}".format(std_error(init_time)))
+# print("accuracy_diff_sketch_size_cosh_std_err={}".format(std_error(accuracy_diff_sketch_size)))
+# print("query_pair_time_cosh_std_err={}".format(std_error(query_pair_time)))
+# print("query_all_time_cosh_std_err={}".format(std_error(query_all_time)))
+# print("init_time_cosh_std_err={}".format(std_error(init_time)))
 
 
 
@@ -294,6 +295,8 @@ for d in [1000]:
                 end = time.time()
                 query_pair_time[-1].append((end-start)/100 * 1000) #millisecond
             #print("query pair average time {} seconds".format((end-start)/1000))
+
+print(accuracy_diff_D)
 
 
 print("memory_consumption_cosh_diff_D={}".format(memory_consumption_diff_sketch_size))
