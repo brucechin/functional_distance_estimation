@@ -209,18 +209,22 @@ def accuracy(true_result, result):
 
 
 
+def std_error(input):
+    std_err = []
+    for i in range(len(input)):
+        std_err.append(np.std(input[i])/math.sqrt(len(input[i])))
+    return std_err
 
+def compute_mean(input):
+    mean_out = []
+    for i in range(len(input)):
+        mean_out.append(np.mean(input[i]))
+    return mean_out
 
 n=10000
 
-init_time = []
-query_all_time = []
-query_one_time = []
-query_pair_time = []
-memory_consumption_diff_sketch_size = []  #MB
-accuracy_diff_sketch_size = []
-accuracy_diff_D = []
-memory_consumption_diff_D = []  #MB
+num_repeat = 5
+
 
 tilde_fA_f_norm_error = []
 tilde_fA_spectral_norm_error = []
@@ -233,51 +237,78 @@ for D in [0,1,2,3,4,5,6,7,8,9,10]:
 print("tilde_fA_f_norm_error={}".format(tilde_fA_f_norm_error))
 print("tilde_fA_spetral_norm_error={}".format(tilde_fA_spectral_norm_error))
 
+init_time = []
+query_all_time = []
+query_one_time = []
+query_pair_time = []
+memory_consumption_diff_sketch_size = []  #MB
+accuracy_diff_sketch_size = []
+accuracy_diff_D = []
+memory_consumption_diff_D = []  #MB
+
+
 
 # fix D and benchmark under different m
 
-# for d in [1000]:
-#     for m in [10, 20, 40, 80, 160, 320, 1000]:
-#         for D in [3]:
-#             start = time.time()
-#             instance = MetricMaintenance(n, d, D, m, True)
-#             end = time.time()
-#             init_time.append(end - start)
-#             memory_consumption_diff_sketch_size.append(instance.memory_complexity()) 
-#             #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
-#             start = time.time()
-#             for i in range(10):
-#                 q = np.random.rand(d)
-#                 instance.query_all(q)
-#             end = time.time()
-#             query_all_time.append((end-start)/10)
-#             #print("query all time {} seconds".format((end-start)/10))
-#             accuracy_diff_sketch_size.append(accuracy(instance.query_all_accurate(q), instance.query_all(q)))
+for d in [1000]:
+    for m in [10, 20, 40, 80, 160, 320, 1000]:
+        for D in [3]:
 
-#             start = time.time()
-#             q = np.random.rand(d)
-#             for i in range(1000):
-#                 instance.query_one(q, random.randint(0, n-1))
-#             end = time.time()
-#             query_one_time.append((end-start)/1000 * 1000) #millisecond
-#             #print("query one average time {} seconds".format((end-start)/1000))
+            instance = MetricMaintenance(n, d, D, m, True)
+
+            init_time.append([])
+            for i in range(3):
+                start = time.time()
+                instance = MetricMaintenance(n, d, D, m, True)
+                end = time.time()
+                init_time[-1].append(end - start)
 
 
-#             start = time.time()
-#             for i in range(1000):
-#                 instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
-#             end = time.time()
-#             query_pair_time.append((end-start)/1000 * 1000) #millisecond
-#             #print("query pair average time {} seconds".format((end-start)/1000))
+            memory_consumption_diff_sketch_size.append(instance.memory_complexity()) 
+            #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
+            
+            accuracy_diff_sketch_size.append([])
+            query_all_time.append([])
+            for i in range(num_repeat):
+                start = time.time()
+                q = np.random.rand(d)
+                ans = instance.query_all(q)
+                end = time.time()
+                # used for compute error bar
+                query_all_time[-1].append((end-start))
+                #print("query all time {} seconds".format((end-start)))
+                accuracy_diff_sketch_size[-1].append(accuracy(instance.query_all_accurate(q), ans))
 
-# print("init_time_exp={}".format(init_time))
-# print("query_all_time_exp={}".format(query_all_time))
+            # start = time.time()
+            # q = np.random.rand(d)
+            # for i in range(1000):
+            #     instance.query_one(q, random.randint(0, n-1))
+            # end = time.time()
+            # query_one_time.append((end-start)/1000 * 1000) #millisecond
+            # #print("query one average time {} seconds".format((end-start)/1000))
+
+            query_pair_time.append([])
+            for j in range(num_repeat):
+                start = time.time()
+                for i in range(100):
+                    instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
+                end = time.time()
+                query_pair_time[-1].append((end-start)/100 * 1000) #millisecond
+            #print("query pair average time {} seconds".format((end-start)/1000))
+
+
+print("init_time_exp={}".format(compute_mean(init_time)))
+print("query_all_time_exp={}".format(compute_mean(query_all_time)))
 # print("query_one_time_exp={}".format(query_one_time))
-# print("query_pair_time_exp={}".format(query_pair_time))
-# print("memory_consumption_exp={}".format(memory_consumption_diff_sketch_size))
-# print("accuracy_diff_sketch_size_exp={}".format(accuracy_diff_sketch_size))
+print("query_pair_time_exp={}".format(compute_mean(query_pair_time)))
+print("memory_consumption_exp={}".format(memory_consumption_diff_sketch_size))
+print("accuracy_diff_sketch_size_exp={}".format(compute_mean(accuracy_diff_sketch_size)))
 
 
+print("accuracy_diff_sketch_size_exp_std_err={}".format(std_error(accuracy_diff_sketch_size)))
+print("query_pair_time_exp_std_err={}".format(std_error(query_pair_time)))
+print("query_all_time_exp_std_err={}".format(std_error(query_all_time)))
+print("init_time_exp_std_err={}".format(std_error(init_time)))
 
 
 # fix m and benchmark under different D
@@ -296,45 +327,64 @@ memory_consumption_diff_D = []  #MB
 for d in [1000]:
     for m in [160]:
         for D in [0,1,2,3,5,10,20]:
-            start = time.time()
             instance = MetricMaintenance(n, d, D, m, True)
-            end = time.time()
-            init_time.append(end - start)
+
+            init_time.append([])
+            for i in range(3):
+                start = time.time()
+                instance = MetricMaintenance(n, d, D, m, True)
+                end = time.time()
+                init_time[-1].append(end - start)
             memory_consumption_diff_D.append(instance.memory_complexity()) 
             #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
-            start = time.time()
-            for i in range(10):
+            
+            
+            
+            accuracy_diff_D.append([])
+            query_all_time.append([])
+            for i in range(num_repeat):
+                start = time.time()
                 q = np.random.rand(d)
-                instance.query_all(q)
-            end = time.time()
-            query_all_time.append((end-start)/10)
-            #print("query all time {} seconds".format((end-start)/10))
-            accuracy_diff_D.append(accuracy(instance.query_all_accurate(q), instance.query_all(q)))
+                ans = instance.query_all(q)
+                end = time.time()
+                query_all_time[-1].append((end-start))
+                #print("query all time {} seconds".format((end-start)))
+                accuracy_diff_D[-1].append(accuracy(instance.query_all_accurate(q), ans))
 
-            start = time.time()
-            q = np.random.rand(d)
-            for i in range(1000):
-                instance.query_one(q, random.randint(0, n-1))
-            end = time.time()
-            query_one_time.append((end-start)/1000 * 1000) #millisecond
-            #print("query one average time {} seconds".format((end-start)/1000))
+            # start = time.time()
+            # q = np.random.rand(d)
+            # for i in range(1000):
+            #     instance.query_one(q, random.randint(0, n-1))
+            # end = time.time()
+            # query_one_time.append((end-start)/1000 * 1000) #millisecond
+            # #print("query one average time {} seconds".format((end-start)/1000))
 
 
-            start = time.time()
-            for i in range(1000):
-                instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
-            end = time.time()
-            query_pair_time.append((end-start)/1000 * 1000) #millisecond
+            query_pair_time.append([])
+            for j in range(num_repeat):
+                start = time.time()
+                for i in range(100):
+                    instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
+                end = time.time()
+                query_pair_time[-1].append((end-start)/100 * 1000) #millisecond
             #print("query pair average time {} seconds".format((end-start)/1000))
 
-print("init_time_exp_diff_D={}".format(init_time))
-print("query_all_time_exp_diff_D={}".format(query_all_time))
-print("query_one_time_exp_diff_D={}".format(query_one_time))
-print("query_pair_time_exp_diff_D={}".format(query_pair_time))
+
 print("memory_consumption_exp_diff_D={}".format(memory_consumption_diff_D))
-print("accuracy_diff_D_exp={}".format(accuracy_diff_D))
 
 
+
+print("init_time_exp_diff_D={}".format(compute_mean(init_time)))
+print("query_all_time_exp_diff_D={}".format(compute_mean(query_all_time)))
+# print("query_one_time_exp_diff_D={}".format(query_one_time))
+print("query_pair_time_exp_diff_D={}".format(compute_mean(query_pair_time)))
+print("accuracy_diff_D_exp={}".format(compute_mean(accuracy_diff_D)))
+
+print("init_time_exp_diff_D_std_err={}".format(std_error(init_time)))
+print("query_all_time_exp_diff_D_std_err={}".format(std_error(query_all_time)))
+# print("query_one_time_exp_diff_D_std_err={}".format(std_error(query_one_time)))
+print("query_pair_time_exp_diff_D_std_err={}".format(std_error(query_pair_time)))
+print("accuracy_diff_D_exp_std_err={}".format(std_error(accuracy_diff_D)))
 
 
 

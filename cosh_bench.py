@@ -172,7 +172,7 @@ def compute_mean(input):
         mean_out.append(np.mean(input[i]))
     return mean_out
 
-n=1000
+n=10000
 
 num_repeat = 5
 
