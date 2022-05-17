@@ -140,7 +140,8 @@ class MetricMaintenance:
 
     def query_one(self, q, i):
         Pi_U_q = []
-        for r in range(self.R):
+        sampled_indexes = random.sample(range(self.L), self.R)
+        for r in sampled_indexes:
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))
@@ -148,7 +149,7 @@ class MetricMaintenance:
         d_i = []
         for tau in range(self.D + 1):
             d_i_tau = []
-            for r in range(self.R):
+            for r in sampled_indexes:
                 tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
                 tmp_norm = 1.0/math.factorial(tau) * np.dot(tmp, tmp.T)
                 d_i_tau.append(tmp_norm)
@@ -161,7 +162,8 @@ class MetricMaintenance:
         p = []
         for tau in range(self.D + 1):
             d_i_tau = []
-            for r in range(self.R):
+            sampled_indexes = random.sample(range(self.L), self.R)
+            for r in sampled_indexes:
                 tmp =  self.tilde_x[i][r][tau] - self.tilde_x[j][r][tau]
                 tmp_norm = 1.0/math.factorial(tau) * np.dot(tmp, tmp.T)
                 d_i_tau.append(tmp_norm)
@@ -173,7 +175,8 @@ class MetricMaintenance:
     def query_all(self, q):
         Pi_U_q = []
         # start = time.time()
-        for r in range(self.R):#TODO lianke, r should be randomly choosen from [L] for R times.
+        sampled_indexes = random.sample(range(self.L), self.R)
+        for r in sampled_indexes:
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))
@@ -231,6 +234,7 @@ print("tilde_fA_f_norm_error={}".format(tilde_fA_f_norm_error))
 print("tilde_fA_spetral_norm_error={}".format(tilde_fA_spectral_norm_error))
 
 
+# fix D and benchmark under different m
 
 # for d in [1000]:
 #     for m in [10, 20, 40, 80, 160, 320, 1000]:
@@ -275,6 +279,8 @@ print("tilde_fA_spetral_norm_error={}".format(tilde_fA_spectral_norm_error))
 
 
 
+
+# fix m and benchmark under different D
 
 
 init_time = []
@@ -327,6 +333,10 @@ print("query_one_time_exp_diff_D={}".format(query_one_time))
 print("query_pair_time_exp_diff_D={}".format(query_pair_time))
 print("memory_consumption_exp_diff_D={}".format(memory_consumption_diff_D))
 print("accuracy_diff_D_exp={}".format(accuracy_diff_D))
+
+
+
+
 
 # for d in [1000]:
 #     for m in [160]:

@@ -97,7 +97,8 @@ class MetricMaintenance:
 
     def query_one(self, q, i):
         Pi_U_q = []
-        for r in range(self.R):
+        sampled_indexes = random.sample(range(self.L), self.R)
+        for r in sampled_indexes:
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))
@@ -105,7 +106,7 @@ class MetricMaintenance:
         d_i = []
         for tau in range(self.D + 1):
             d_i_tau = []
-            for r in range(self.R):
+            for r in sampled_indexes:
                 tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
                 tmp_norm = 1.0/math.factorial(2*tau+1) * np.dot(tmp, tmp.T)
                 d_i_tau.append(tmp_norm)
@@ -118,7 +119,8 @@ class MetricMaintenance:
         p = []
         for tau in range(self.D + 1):
             d_i_tau = []
-            for r in range(self.R):
+            sampled_indexes = random.sample(range(self.L), self.R)
+            for r in sampled_indexes:
                 tmp =  self.tilde_x[i][r][tau] - self.tilde_x[j][r][tau]
                 tmp_norm = 1.0/math.factorial(2*tau+1) * np.dot(tmp, tmp.T)
                 d_i_tau.append(tmp_norm)
@@ -130,7 +132,8 @@ class MetricMaintenance:
     def query_all(self, q):
         Pi_U_q = []
         # start = time.time()
-        for r in range(self.R):#TODO lianke, r should be randomly choosen from [L] for R times.
+        sampled_indexes = random.sample(range(self.L), self.R)
+        for r in sampled_indexes:
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))

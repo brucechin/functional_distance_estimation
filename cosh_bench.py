@@ -97,15 +97,16 @@ class MetricMaintenance:
 
     def query_one(self, q, i):
         Pi_U_q = []
-        for r in range(self.R):
+        for r in range(self.L):
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))
             Pi_U_q.append(tmp)
         d_i = []
+        sampled_indexes = random.sample(range(self.L), self.R)
         for tau in range(self.D + 1):
             d_i_tau = []
-            for r in range(self.R):
+            for r in sampled_indexes:
                 tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
                 tmp_norm = 1.0/math.factorial(2*tau) * np.dot(tmp, tmp.T)
                 d_i_tau.append(tmp_norm)
@@ -116,9 +117,10 @@ class MetricMaintenance:
     
     def query_pair(self, i, j):
         p = []
+        sampled_indexes = random.sample(range(self.L), self.R)
         for tau in range(self.D + 1):
             d_i_tau = []
-            for r in range(self.R):
+            for r in sampled_indexes:
                 tmp =  self.tilde_x[i][r][tau] - self.tilde_x[j][r][tau]
                 tmp_norm = 1.0/math.factorial(2*tau) * np.dot(tmp, tmp.T)
                 d_i_tau.append(tmp_norm)
@@ -130,18 +132,18 @@ class MetricMaintenance:
     def query_all(self, q):
         Pi_U_q = []
         # start = time.time()
-        for r in range(self.R):#TODO lianke, r should be randomly choosen from [L] for R times.
+        for r in range(self.L):
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))
             Pi_U_q.append(tmp)
         d = []
-
+        sampled_indexes = random.sample(range(self.L), self.R)
         for i in range(self.n):
             d_i = []
             for tau in range(self.D + 1):
                 d_i_tau = []
-                for r in range(self.R):
+                for r in sampled_indexes:
                     tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
                     tmp_norm = 1.0/math.factorial(2*tau) * np.dot(tmp, tmp.T)
                     d_i_tau.append(tmp_norm)
@@ -161,7 +163,7 @@ def accuracy(true_result, result):
 
 
 
-n=10000
+n=1000
 
 init_time = []
 query_all_time = []
@@ -175,20 +177,28 @@ memory_consumption_diff_D = []  #MB
 for d in [1000]:
     for m in [10, 20, 40, 80, 160, 320, 1000]:
         for D in [3]:
-            start = time.time()
             instance = MetricMaintenance(n, d, D, m, True)
-            end = time.time()
-            init_time.append(end - start)
+
+            init_time.append([])
+            for i in range(10):
+                start = time.time()
+                instance = MetricMaintenance(n, d, D, m, True)
+                end = time.time()
+                init_time[-1].append(end - start)
+            
             memory_consumption_diff_sketch_size.append(instance.memory_complexity()) 
             #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
-            start = time.time()
+            accuracy_diff_sketch_size.append([])
+            query_all_time.append([])
             for i in range(10):
+                start = time.time()
                 q = np.random.rand(d)
-                instance.query_all(q)
-            end = time.time()
-            query_all_time.append((end-start)/10)
-            #print("query all time {} seconds".format((end-start)/10))
-            accuracy_diff_sketch_size.append(accuracy(instance.query_all_accurate(q), instance.query_all(q)))
+                ans = instance.query_all(q)
+                end = time.time()
+                # used for compute error bar
+                query_all_time[-1].append((end-start))
+                #print("query all time {} seconds".format((end-start)))
+                accuracy_diff_sketch_size[-1].append(accuracy(instance.query_all_accurate(q), ans))
 
             start = time.time()
             q = np.random.rand(d)
@@ -225,23 +235,31 @@ accuracy_diff_D = []
 memory_consumption_diff_D = []  #MB
 
 
+
 for d in [1000]:
     for m in [160]:
         for D in [0,1,2,3,5,10,20]:
-            start = time.time()
             instance = MetricMaintenance(n, d, D, m, True)
-            end = time.time()
-            init_time.append(end - start)
+
+            init_time.append([])
+            for i in range(10):
+                start = time.time()
+                instance = MetricMaintenance(n, d, D, m, True)
+                end = time.time()
+                init_time[-1].append(end - start)
             memory_consumption_diff_sketch_size.append(instance.memory_complexity()) 
             #print("d={} sketch_size = {} D ={} \ninit time {} seconds".format(d, m, D, end-start))
-            start = time.time()
+
+            accuracy_diff_D.append([])
+            query_all_time.append([])
             for i in range(10):
+                start = time.time()
                 q = np.random.rand(d)
-                instance.query_all(q)
-            end = time.time()
-            query_all_time.append((end-start)/10)
-            #print("query all time {} seconds".format((end-start)/10))
-            accuracy_diff_D.append(accuracy(instance.query_all_accurate(q), instance.query_all(q)))
+                ans = instance.query_all(q)
+                end = time.time()
+                query_all_time[-1].append((end-start))
+                #print("query all time {} seconds".format((end-start)))
+                accuracy_diff_D[-1].append(accuracy(instance.query_all_accurate(q), ans))
 
             start = time.time()
             q = np.random.rand(d)
@@ -250,7 +268,6 @@ for d in [1000]:
             end = time.time()
             query_one_time.append((end-start)/1000 * 1000) #millisecond
             #print("query one average time {} seconds".format((end-start)/1000))
-
 
             start = time.time()
             for i in range(1000):

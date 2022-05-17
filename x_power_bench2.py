@@ -194,7 +194,8 @@ class MetricMaintenance:
     def query_all(self, q):
         Pi_U_q = []
         # start = time.time()
-        for r in range(self.R):#TODO lianke, r should be randomly choosen from [L] for R times.
+        sampled_indexes = random.sample(range(self.L), self.R)
+        for r in sampled_indexes:
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))
