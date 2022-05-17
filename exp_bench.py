@@ -175,8 +175,7 @@ class MetricMaintenance:
     def query_all(self, q):
         Pi_U_q = []
         # start = time.time()
-        sampled_indexes = random.sample(range(self.L), self.R)
-        for r in sampled_indexes:
+        for r in range(self.L):
             tmp = []
             for tau in range(self.D + 1):
                 tmp.append(np.dot(self.Pi_U[r][tau], q))
@@ -184,13 +183,13 @@ class MetricMaintenance:
         # end = time.time()
         # print("first part time {}".format(end-start))
         d = []
-
+        sampled_indexes = random.sample(range(self.L), self.R)
         # start = time.time()
         for i in range(self.n):
             d_i = []
             for tau in range(self.D + 1):
                 d_i_tau = []
-                for r in range(self.R):
+                for r in sampled_indexes:
                     tmp = Pi_U_q[r][tau] - self.tilde_x[i][r][tau]
                     tmp_norm = 1.0/math.factorial(tau) * np.dot(tmp, tmp.T)
                     d_i_tau.append(tmp_norm)
