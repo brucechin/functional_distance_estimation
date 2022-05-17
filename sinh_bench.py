@@ -178,7 +178,7 @@ def compute_mean(input):
 
 n=10000
 
-num_repeat = 5
+num_repeat = 10
 
 
 init_time = []
