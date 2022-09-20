@@ -14,18 +14,18 @@ y_exp_minus = np.exp(-x)
 y_cosh = np.cosh(x)
 y_sinh = np.sinh(x)
 
-ticks_size = 20
+ticks_size = 25
 plt.plot(x, y_exp, label='exp(x)')
 plt.plot(x, y_exp_minus, label='exp(-x)')
 plt.plot(x, y_cosh, label='cosh(x)')
 plt.plot(x, y_sinh, label='sinh(x)')
 plt.xlabel("x", fontsize= ticks_size)
 plt.ylabel("y", fontsize= ticks_size)
-plt.xticks(fontsize= 15)
-plt.yticks(fontsize= 15)
+plt.xticks(fontsize= 20)
+plt.yticks(fontsize= 20)
 plt.ylim([-40,60])
 plt.legend(loc='best')
-plt.legend(loc="best", fontsize=15)
-plt.savefig("functions_figure.pdf", dpi=300, facecolor='w', edgecolor='w',
+plt.legend(loc="best", fontsize=20)
+plt.savefig("functions_figure.pdf", dpi=400, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 plt.show()

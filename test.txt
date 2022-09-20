@@ -1,0 +1,6 @@
+We agree with the reviewer that for simple function $f$, say $e^x$, $\cos(x)$ or $\sin(x)$, computing Taylor expansion does not give significant benefits, 
+since we assume computing square root is cheap. However, consider the following setting: Let $X \in \mathbb{R}^{m \times d}$ be a data matrix, and $f$ is some kernel function 
+(say, Gaussian kernel) and we consider the task of computing a Gaussian kernel for $X$. Naively, this will take $O(m^2 d)$ time (since we need to at least evaluate $O(m^2)$ pairs of inner products).
+ On the other hand, Gaussian kernel can be decomposed into $DKD$, where $D$ is a diagonal matrix with $D_{i, i}=\exp(-\|x_i\|_2^2)$ that is easy to compute, and $K_{i, j} = \exp(x_i^\top x_j)$ consists 
+ of all pairs of inner products. For this task, one can generalize the sketching matrix we use to perform tensor sketch, and form a good approximation $B^\top B \approx_\epsilon DKD$ in time $o(m^2 d)$. 
+ Many of the kernel functions that admits a Taylor expansion with non-negative coefficients can be decomposed and approximated with Taylor expansion in this fashion.
