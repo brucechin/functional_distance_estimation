@@ -146,11 +146,7 @@ plt.savefig("tilde_fA_approximation_error.pdf", dpi=None, facecolor='w', edgecol
 #f=exp(x)
 x = np.linspace(0, len(init_time_exp), len(init_time_exp))
 plt.figure()
-<<<<<<< HEAD
-plt.plot(x, init_time_exp, label='Init time', marker='o')
-=======
 plt.errorbar(x, init_time_exp, yerr=init_time_exp_std_err, label='Init time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
@@ -159,11 +155,7 @@ plt.savefig("init_time_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor=
             orientation='portrait', bbox_inches='tight')
 # plt.show()
 plt.figure()
-<<<<<<< HEAD
-plt.plot(x, query_all_time_exp, label='QueryAll time', marker='o')
-=======
 plt.errorbar(x, query_all_time_exp, yerr=query_all_time_exp_std_err, label='QueryAll time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
@@ -172,19 +164,6 @@ plt.savefig("queryall_time_sketch_size_exp.pdf", dpi=None, facecolor='w', edgeco
             orientation='portrait', bbox_inches='tight')
 # plt.show()
 
-<<<<<<< HEAD
-plt.figure()
-plt.plot(x, query_one_time_exp, label='QueryOne time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_time_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-plt.figure()
-plt.plot(x, query_pair_time_exp, label='QueryPair time', marker='o')
-=======
 # plt.figure()
 # plt.errorbar(x, query_one_time_exp, label='QueryOne time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 # plt.xlabel("Sketch Size", fontsize= ticks_size)
@@ -196,7 +175,6 @@ plt.plot(x, query_pair_time_exp, label='QueryPair time', marker='o')
 # plt.show()
 plt.figure()
 plt.errorbar(x, query_pair_time_exp, yerr=query_pair_time_exp_std_err, label='QueryPair time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
@@ -207,11 +185,7 @@ plt.savefig("querypair_time_sketch_size_exp.pdf", dpi=None, facecolor='w', edgec
 
 
 plt.figure()
-<<<<<<< HEAD
-plt.plot(x, memory_consumption_exp, marker='o')
-=======
 plt.errorbar(x, memory_consumption_exp, marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
@@ -235,13 +209,8 @@ plt.savefig("accuracy_sketch_size_exp.pdf", dpi=None, facecolor='w', edgecolor='
 
 x = np.linspace(0, len(accuracy_diff_D_exp), len(accuracy_diff_D_exp))
 plt.figure()
-<<<<<<< HEAD
-plt.plot(x, init_time_exp_diff_D, label='Init time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-=======
 plt.errorbar(x, init_time_exp_diff_D, yerr=init_time_exp_diff_D_std_err, label='Init time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
@@ -249,13 +218,8 @@ plt.savefig("init_time_truncation_degree_exp.pdf", dpi=None, facecolor='w', edge
             orientation='portrait', bbox_inches='tight')
 # plt.show()
 plt.figure()
-<<<<<<< HEAD
-plt.plot(x, query_all_time_exp_diff_D, label='QueryAll time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-=======
 plt.errorbar(x, query_all_time_exp_diff_D, yerr=query_all_time_exp_diff_D_std_err, label='QueryAll time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
@@ -263,20 +227,6 @@ plt.savefig("queryall_time_truncation_degree_exp.pdf", dpi=None, facecolor='w', 
             orientation='portrait', bbox_inches='tight')
 # plt.show()
 
-<<<<<<< HEAD
-plt.figure()
-plt.plot(x, query_one_time_exp_diff_D, label='QueryOne time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
-plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_time_truncation_degree_exp.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-plt.figure()
-plt.plot(x, query_pair_time_exp_diff_D, label='QueryPair time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-=======
 # plt.figure()
 # plt.errorbar(x, query_one_time_exp_diff_D, label='QueryOne time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 # plt.xlabel("Truncation Degree", fontsize= ticks_size)
@@ -289,7 +239,6 @@ plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.figure()
 plt.errorbar(x, query_pair_time_exp_diff_D, yerr=query_pair_time_exp_diff_D_std_err, label='QueryPair time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.ylabel("Time (ms)", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
@@ -299,13 +248,8 @@ plt.savefig("querypair_time_truncation_degree_exp.pdf", dpi=None, facecolor='w',
 
 
 plt.figure()
-<<<<<<< HEAD
-plt.plot(x, memory_consumption_exp_diff_D, marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-=======
 plt.errorbar(x, memory_consumption_exp_diff_D, marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
@@ -363,15 +307,6 @@ plt.savefig("queryall_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgec
 
 # plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, query_one_time_cosh, label='QueryOne time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-=======
 # plt.errorbar(x, query_one_time_cosh, label='QueryOne time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 # plt.xlabel("Sketch Size", fontsize= ticks_size)
 # plt.ylabel("Time (ms)", fontsize= ticks_size)
@@ -379,7 +314,6 @@ plt.savefig("queryone_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgec
 # plt.yticks(fontsize=ticks_size)
 # plt.savefig("queryone_time_sketch_size_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
 #             orientation='portrait', bbox_inches='tight')
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 # plt.show()
 
 
@@ -445,18 +379,6 @@ plt.savefig("queryall_time_truncation_degree_cosh.pdf", dpi=None, facecolor='w',
 
 # plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, query_one_time_cosh_diff_D, label='QueryOne time', marker='o')
-# plt.plot(x, query_pair_time_cosh_diff_D, label='QueryPair time')
-plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
-plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
-# plt.legend(loc='upper left', fontsize=15)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_time_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-=======
 # plt.errorbar(x, query_one_time_cosh_diff_D,  label='QueryOne time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 # # plt.errorbar(x, query_pair_time_cosh_diff_D, label='QueryPair time')
 # plt.xlabel("Truncation Degree", fontsize= ticks_size)
@@ -467,7 +389,6 @@ plt.savefig("queryone_time_truncation_degree_cosh.pdf", dpi=None, facecolor='w',
 # plt.savefig("queryone_time_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edgecolor='w',
 #             orientation='portrait', bbox_inches='tight')
 # # plt.show()
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 
 plt.figure()
 
@@ -536,15 +457,9 @@ plt.savefig("accuracy_truncation_degree_cosh.pdf", dpi=None, facecolor='w', edge
 plt.figure()
 
 x = np.linspace(0, len(init_time_sinh), len(init_time_sinh))
-<<<<<<< HEAD
-plt.plot(x, init_time_sinh, label='Init time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-=======
 plt.errorbar(x, init_time_sinh, yerr=init_time_sinh_std_err, label='Init time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("init_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
@@ -554,35 +469,15 @@ plt.savefig("init_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor
 plt.figure()
 
 x = np.linspace(0, len(init_time_sinh), len(init_time_sinh))
-<<<<<<< HEAD
-plt.plot(x, query_all_time_sinh, label='QueryAll', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-=======
 plt.errorbar(x, query_all_time_sinh, yerr=query_all_time_sinh_std_err, label='QueryAll', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("queryall_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()
 
-<<<<<<< HEAD
-plt.plot(x, query_one_time_sinh, label='QueryOne time', marker='o')
-# plt.plot(x, query_pair_time_sinh, label='QueryPair time')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-
-plt.figure()
-plt.plot(x, query_pair_time_sinh, label='QueryPair time', marker='o')
-=======
 # plt.figure()
 
 # plt.errorbar(x, query_one_time_sinh,   label='QueryOne time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
@@ -597,9 +492,8 @@ plt.plot(x, query_pair_time_sinh, label='QueryPair time', marker='o')
 
 plt.figure()
 plt.errorbar(x, query_pair_time_sinh, yerr=query_pair_time_sinh_std_err, label='QueryPair time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
+plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("querypair_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
@@ -608,11 +502,7 @@ plt.savefig("querypair_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edge
 
 plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, memory_consumption_sinh, marker='o')
-=======
 plt.errorbar(x, memory_consumption_sinh, marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
@@ -639,53 +529,26 @@ x = np.linspace(0, len(accuracy_diff_D_sinh), len(accuracy_diff_D_sinh))
 plt.figure()
 
 x = np.linspace(0, len(init_time_sinh_diff_D), len(init_time_sinh_diff_D))
-<<<<<<< HEAD
-plt.plot(x, init_time_sinh_diff_D, label='Init time', marker='o')
-plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
-=======
 plt.errorbar(x, init_time_sinh_diff_D, yerr=init_time_sinh_diff_D_std_err ,label='Init time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.yticks(fontsize=ticks_size)
-plt.savefig("init_time_truncation_degree_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
+plt.savefig("init_time_sketch_size_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()
 
 plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, query_all_time_sinh_diff_D, label='QueryAll', marker='o')
-plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-=======
 plt.errorbar(x, query_all_time_sinh_diff_D, yerr=query_all_time_sinh_diff_D_std_err, label='QueryAll', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("queryall_time_truncation_degree_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()
 
-<<<<<<< HEAD
-plt.plot(x, query_one_time_sinh_diff_D, label='QueryOne time', marker='o')
-# plt.plot(x, query_pair_time_sinh, label='QueryPair time')
-plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
-plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_time_truncation_degree_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-
-plt.figure()
-plt.plot(x, query_pair_time_sinh_diff_D, label='QueryPair time', marker='o')
-=======
 # plt.figure()
 
 # plt.errorbar(x, query_one_time_sinh_diff_D , label='QueryOne time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
@@ -700,9 +563,8 @@ plt.plot(x, query_pair_time_sinh_diff_D, label='QueryPair time', marker='o')
 
 plt.figure()
 plt.errorbar(x, query_pair_time_sinh_diff_D, yerr=query_pair_time_sinh_diff_D_std_err, label='QueryPair time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
+plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x,[0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("querypair_time_truncation_degree_sinh.pdf", dpi=None, facecolor='w', edgecolor='w',
@@ -711,11 +573,7 @@ plt.savefig("querypair_time_truncation_degree_sinh.pdf", dpi=None, facecolor='w'
 
 plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, memory_consumption_sinh_diff_D, marker='o')
-=======
 plt.errorbar(x, memory_consumption_sinh_diff_D , marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
@@ -745,15 +603,9 @@ plt.savefig("accuracy_truncation_degree_sinh.pdf", dpi=None, facecolor='w', edge
 plt.figure()
 
 x = np.linspace(0, len(init_time_power1), len(init_time_power1))
-<<<<<<< HEAD
-plt.plot(x, init_time_power1, label='Init time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-=======
 plt.errorbar(x, init_time_power1, yerr=init_time_power_std_err, label='Init time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("init_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
@@ -763,15 +615,9 @@ plt.savefig("init_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolo
 plt.figure()
 
 x = np.linspace(0, len(init_time_power1), len(init_time_power1))
-<<<<<<< HEAD
-plt.plot(x, query_all_time_power1, label='QueryAll time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-=======
 plt.errorbar(x, query_all_time_power1, yerr=query_all_time_power_std_err, label='QueryAll time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("queryall_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
@@ -779,16 +625,6 @@ plt.savefig("queryall_time_sketch_size_power.pdf", dpi=None, facecolor='w', edge
 # plt.show()
 # plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, query_one_time_power1, label='QueryOne time', marker='o')
-plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
-plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-=======
 # plt.errorbar(x, query_one_time_power1,label='QueryOne time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 # plt.xlabel("Sketch Size", fontsize= ticks_size)
 # plt.ylabel("Time (sec)", fontsize= ticks_size)
@@ -797,18 +633,13 @@ plt.savefig("queryone_time_sketch_size_power.pdf", dpi=None, facecolor='w', edge
 # plt.savefig("queryone_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
 #             orientation='portrait', bbox_inches='tight')
 # # plt.show()
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 
 
 plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, query_pair_time_power1, label='QueryPair time', marker='o')
-=======
 plt.errorbar(x, query_pair_time_power1, yerr=query_pair_time_power_std_err, label='QueryPair time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Sketch Size", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
+plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("querypair_time_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor='w',
@@ -816,11 +647,7 @@ plt.savefig("querypair_time_sketch_size_power.pdf", dpi=None, facecolor='w', edg
 # plt.show()
 plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, memory_consumption_power1, marker='o')
-=======
 plt.errorbar(x, memory_consumption_power1, marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Sketch Size", fontsize= ticks_size)
 plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
 plt.xticks(x, [10, 20, 40, 80, 160,320,1000], fontsize= ticks_size)
@@ -852,16 +679,10 @@ plt.savefig("accuracy_sketch_size_power.pdf", dpi=None, facecolor='w', edgecolor
 x = np.linspace(0, len(accuracy_diff_D_power), len(accuracy_diff_D_power))
 
 plt.figure()
-<<<<<<< HEAD
-plt.plot(x, init_time_power_diff_D, label='Init time', marker='o')
-plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-=======
 
 plt.errorbar(x, init_time_power_diff_D, yerr=init_time_power_diff_D_std_err,  label='Init time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("init_time_truncation_degree_power.pdf", dpi=None, facecolor='w', edgecolor='w',
@@ -871,31 +692,15 @@ plt.savefig("init_time_truncation_degree_power.pdf", dpi=None, facecolor='w', ed
 plt.figure()
 
 x = np.linspace(0, len(init_time_power1), len(init_time_power1))
-<<<<<<< HEAD
-plt.plot(x, query_all_time_power_diff_D, label='QueryAll time', marker='o')
-plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (sec)", fontsize= ticks_size)
-=======
 plt.errorbar(x, query_all_time_power_diff_D, yerr=query_all_time_power_diff_D_std_err , label='QueryAll time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Time (ms)", fontsize= ticks_size)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("queryall_time_truncation_degree_power.pdf", dpi=None, facecolor='w', edgecolor='w',
             orientation='portrait', bbox_inches='tight')
 # plt.show()
 
-<<<<<<< HEAD
-plt.plot(x, query_one_time_power_diff_D, label='QueryOne time', marker='o')
-plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
-plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
-plt.yticks(fontsize=ticks_size)
-plt.savefig("queryone_time_truncation_degree_power.pdf", dpi=None, facecolor='w', edgecolor='w',
-            orientation='portrait', bbox_inches='tight')
-# plt.show()
-=======
 # plt.figure()
 
 # plt.errorbar(x, query_one_time_power_diff_D,   label='QueryOne time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
@@ -906,18 +711,13 @@ plt.savefig("queryone_time_truncation_degree_power.pdf", dpi=None, facecolor='w'
 # plt.savefig("queryone_time_truncation_degree_power.pdf", dpi=None, facecolor='w', edgecolor='w',
 #             orientation='portrait', bbox_inches='tight')
 # # plt.show()
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 
 
 plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, query_pair_time_power_diff_D, label='QueryPair time', marker='o')
-=======
 plt.errorbar(x, query_pair_time_power_diff_D, yerr=query_pair_time_power_diff_D_std_err, label='QueryPair time', marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
-plt.ylabel("Time (ms)", fontsize= ticks_size)
+plt.ylabel("Time (sec)", fontsize= ticks_size)
 plt.xticks(x,[0,1,2,3,5,10,20], fontsize= ticks_size)
 plt.yticks(fontsize=ticks_size)
 plt.savefig("querypair_time_truncation_degree_power.pdf", dpi=None, facecolor='w', edgecolor='w',
@@ -925,11 +725,7 @@ plt.savefig("querypair_time_truncation_degree_power.pdf", dpi=None, facecolor='w
 # plt.show()
 plt.figure()
 
-<<<<<<< HEAD
-plt.plot(x, memory_consumption_power_diff_D, marker='o')
-=======
 plt.errorbar(x, memory_consumption_power_diff_D,    marker='o', markersize=3,capsize=6, ecolor = 'red', elinewidth = 5)
->>>>>>> 30bbfa300deec5ccad94f4fbaaa7b37cd6e04326
 plt.xlabel("Truncation Degree", fontsize= ticks_size)
 plt.ylabel("Mem Usage(MB)", fontsize= ticks_size)
 plt.xticks(x, [0,1,2,3,5,10,20], fontsize= ticks_size)
