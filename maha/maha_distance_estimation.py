@@ -189,20 +189,20 @@ for d in [2560]:
         #     #print("query all time {} seconds".format((end-start)))
         #     accuracy_diff_sketch_size[-1].append(accuracy(instance.query_all_accurate(q), ans))
 
-        query_one_time.append([])
-        for j in range(num_repeat):
-            start = time.time()
-            q = np.random.rand(d)
-            for i in range(1000):
-                instance.query_one(q, random.randint(0, n-1))
-            end = time.time()
-            query_one_time[-1].append((end-start)/1000 * 1000) #millisecond
+        # query_one_time.append([])
+        # for j in range(num_repeat):
+        #     start = time.time()
+        #     q = np.random.rand(d)
+        #     for i in range(10000):
+        #         instance.query_one(q, random.randint(0, n-1))
+        #     end = time.time()
+        #     query_one_time[-1].append((end-start)/1000 * 1000) #millisecond
         #print("query one average time {} seconds".format((end-start)/1000))
 
         query_pair_time.append([])
         for j in range(num_repeat):
             start = time.time()
-            for i in range(1000):
+            for i in range(10000):
                 instance.query_pair(random.randint(0, n-1), random.randint(0, n-1))
             end = time.time()
             query_pair_time[-1].append((end-start)/1000 * 1000) #millisecond
